@@ -59,18 +59,7 @@ export class NavComponent implements OnDestroy {
     {
       label: 'Ministries',
       icon: 'pi pi-fw pi-heart',
-      items: [
-        {
-          label: 'Ministries',
-          icon: 'pi pi-fw pi-heart',
-          routerLink: ['ministries'],
-        },
-        {
-          label: 'Add Ministry',
-          icon: 'pi pi-fw pi-plus',
-          routerLink: ['add-ministry'],
-        },
-      ],
+      routerLink: ['ministries'],
     },
     {
       label: 'Settings',
