@@ -14,6 +14,14 @@ export const routes: Routes = [
     component: LoginComponent,
   },
   {
+    path: 'dashboard',
+    loadComponent: () =>
+      import('./components/dashboard/dashboard.component').then(
+        (m) => m.DashboardComponent
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'members',
     loadComponent: () =>
       import('./components/member/member.component').then(

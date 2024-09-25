@@ -1,1 +1,8 @@
-<p>card works!</p>
+<p-card
+  styleClass="shadow-6 mt-2"
+  header="{{ header() }}"
+  subheader="{{ subheader() }}"
+  [style]="{ width: '98vw' }"
+>
+  <ng-content></ng-content>
+</p-card>

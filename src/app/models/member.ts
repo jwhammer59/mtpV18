@@ -14,7 +14,6 @@ export interface Member {
   zip: string;
   avatarImgName?: string;
   avatarDownloadUrl?: string;
-  religion: string;
   ministries: Ministry[];
   familyID: string;
   physician: string;
@@ -22,4 +21,5 @@ export interface Member {
   hospital: string;
   isActive: boolean;
   isFamilyIDHead: boolean;
+  isMinsitryHead: boolean;
 }
