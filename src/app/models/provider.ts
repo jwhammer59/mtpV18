@@ -1,6 +1,6 @@
 export interface Provider {
   id?: string;
-  providerNameID: string;
+  providerNameId: string;
   providerFullName: string;
   providerPhone: string;
   providerEmail: string;

@@ -125,13 +125,13 @@ export class AddProviderComponent implements OnInit {
   getProviderIdNames() {
     setTimeout(() => {
       this.allProviders.filter((provider) =>
-        this.allProviderNameIds.push(provider.providerNameID)
+        this.allProviderNameIds.push(provider.providerNameId)
       );
     }, 1000);
   }
 
   onSubmit({ value, valid }: { value: Provider; valid: boolean }) {
-    this.selectedProviderNameID = value.providerNameID;
+    this.selectedProviderNameID = value.providerNameId;
     this.submitted.set(true);
 
     if (!valid) {
@@ -142,7 +142,7 @@ export class AddProviderComponent implements OnInit {
         key: 'error',
         life: 2000,
       });
-    } else if (this.allProviderNameIds.includes(value.providerNameID)) {
+    } else if (this.allProviderNameIds.includes(value.providerNameId)) {
       const tempProviderNameID = this.selectedProviderNameID;
       this.selectedProviderNameID = '';
       this.messageService.add({
