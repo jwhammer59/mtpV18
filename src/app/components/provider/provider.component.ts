@@ -6,6 +6,8 @@ import { HeaderComponent } from '../../core/header/header.component';
 import { BodyComponent } from '../../core/body/body.component';
 import { CardComponent } from '../../core/card/card.component';
 
+import { ProviderTableComponent } from './provider-table/provider-table.component';
+
 import { Provider } from '../../models/provider';
 import { ProvidersService } from '../../services/providers.service';
 
@@ -35,6 +37,7 @@ import { Observable } from 'rxjs';
     HeaderComponent,
     BodyComponent,
     CardComponent,
+    ProviderTableComponent,
     ButtonModule,
     CardModule,
     ConfirmDialogModule,

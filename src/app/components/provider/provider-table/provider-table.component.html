@@ -1,1 +1,180 @@
-<p>provider-table works!</p>
+<div>
+  @if(allProviders$ | async; as allProviders) {
+  <p-contextMenu #cm [model]="items"></p-contextMenu>
+  <p-table
+    [value]="allProviders"
+    styleClass="p-datatable-striped"
+    [globalFilterFields]="[
+      'providerNameID',
+      'providerFullName',
+      'providerPhone',
+      'providerEmail',
+      'providerCity',
+      'providerState',
+      'providerType'
+    ]"
+    [paginator]="true"
+    [rows]="10"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [rowsPerPageOptions]="[10, 25, 50]"
+    dataKey="id"
+    [contextMenu]="cm"
+    [(contextMenuSelection)]="selectedProvider"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="familyID">
+          <div class="flex justify-content-center">
+            Provider ID
+            <p-sortIcon field="providerNameID"></p-sortIcon>
+          </div>
+        </th>
+        <th pSortableColumn="providerFullName">
+          <div class="flex justify-content-center">
+            Full Name
+            <p-sortIcon field="providerFullName"></p-sortIcon>
+          </div>
+        </th>
+        <th pSortableColumn="providerPhone">
+          <div class="flex justify-content-center">
+            Phone
+            <p-sortIcon field="providerPhone"></p-sortIcon>
+          </div>
+        </th>
+        <th pSortableColumn="providerEmail">
+          <div class="flex justify-content-center">
+            Email
+            <p-sortIcon field="providerEmail"></p-sortIcon>
+          </div>
+        </th>
+        <th pSortableColumn="providerCity">
+          <div class="flex justify-content-center">
+            City
+            <p-sortIcon field="providerCity"></p-sortIcon>
+          </div>
+        </th>
+        <th pSortableColumn="providerState">
+          <div class="flex justify-content-center">
+            State
+            <p-sortIcon field="providerState"></p-sortIcon>
+          </div>
+        </th>
+        <th pSortableColumn="providerType">
+          <div class="flex justify-content-center">
+            Provider Type
+            <p-sortIcon field="providerType"></p-sortIcon>
+          </div>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-allProviders>
+      <tr
+        [pContextMenuRow]="allProviders"
+        pTooltip="Right click for options"
+        tooltipPosition="top"
+      >
+        <td>
+          <div class="flex justify-content-center">
+            {{ allProviders.providerNameId }}
+          </div>
+        </td>
+        <td>
+          <div class="flex justify-content-center">
+            {{ allProviders.providerFullName }}
+          </div>
+        </td>
+        <td>
+          <div class="flex justify-content-center">
+            {{ allProviders.providerPhone }}
+          </div>
+        </td>
+        <td>
+          <div class="flex justify-content-center">
+            {{ allProviders.providerEmail }}
+          </div>
+        </td>
+        <td>
+          <div class="flex justify-content-center">
+            {{ allProviders.providerCity }}
+          </div>
+        </td>
+        <td>
+          <div class="flex justify-content-center">
+            {{ allProviders.providerState }}
+          </div>
+        </td>
+        <td>
+          <div class="flex justify-content-center">
+            {{ allProviders.providerType }}
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  }
+</div>
+
+<p-dialog
+  header="Header"
+  [(visible)]="showProviderDetails"
+  [modal]="true"
+  [style]="{ width: '30rem' }"
+>
+  <ng-template pTemplate="header">
+    <div class="flex justify-content-start">
+      <div>
+        <span class="font-bold mr-2">Details for Provider ID:</span>
+        <span class="font-italic">{{ selectedProvider.providerNameId }}</span>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="content">
+    <div class="flex flex-column align-items-start">
+      <div>
+        <span class="font-bold mr-2">Name: </span
+        ><span class="font-italic">{{
+          selectedProvider.providerFullName
+        }}</span>
+      </div>
+      <div>
+        <span class="font-bold mr-2">Phone: </span
+        ><span class="font-italic">{{ selectedProvider.providerPhone }}</span>
+      </div>
+      <div>
+        <span class="font-bold mr-2">Email: </span>
+        <span class="font-italic">{{ selectedProvider.providerEmail }}</span>
+      </div>
+      <div>
+        <span class="font-bold mr-2">Address 1: </span
+        ><span class="font-italic">{{ selectedProvider.providerAdd1 }}</span>
+      </div>
+      <div>
+        <span class="font-bold mr-2">Address 2: </span
+        ><span class="font-italic">{{ selectedProvider.providerAdd2 }}</span>
+      </div>
+      <div>
+        <span class="font-bold mr-2">City: </span
+        ><span class="font-italic">{{ selectedProvider.providerCity }}</span>
+      </div>
+      <div>
+        <span class="font-bold mr-2">State: </span
+        ><span class="font-italic">{{ selectedProvider.providerState }}</span>
+      </div>
+      <div>
+        <span class="font-bold mr-2">Zipcode: </span
+        ><span class="font-italic">{{ selectedProvider.providerZip }}</span>
+      </div>
+      <div>
+        <span class="font-bold mr-2">Type: </span
+        ><span class="font-italic">{{ selectedProvider.providerType }}</span>
+      </div>
+      <div>
+        <span class="font-bold mr-2">Is Active: </span
+        ><span class="font-italic">{{
+          selectedProvider.providerIsActive
+        }}</span>
+      </div>
+    </div>
+  </ng-template>
+</p-dialog>
