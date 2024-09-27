@@ -87,7 +87,6 @@ export class ProviderTableComponent implements OnInit {
   }
 
   goToDeleteProvider(id: string) {
-    console.log('Delete Provider', id);
     this.confirmationService.confirm({
       message: 'Are you sure that you want to proceed?',
       header: 'Confirmation',

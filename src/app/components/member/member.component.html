@@ -1,1 +1,23 @@
-<p>member works!</p>
+<p-toast></p-toast>
+<app-header
+  [title]="headerTitle()"
+  [icon]="headerIcon()"
+  [logo]="headerLogo()"
+  [buttonVisible]="headerBtnVisible()"
+  [buttonIcon]="headerBtnIcon()"
+  [buttonLabel]="headerBtnLabel()"
+  (buttonAction)="goToAddMember()"
+></app-header>
+<app-body>
+  <app-card [header]="cardHeader()">
+    <app-member-table></app-member-table>
+  </app-card>
+</app-body>
+
+<p-confirmDialog
+  [style]="{ width: '30vw' }"
+  [baseZIndex]="10000"
+  rejectButtonStyleClass="p-button-text"
+  acceptButtonStyleClass="p-button-text p-button-danger"
+  defaultFocus="reject"
+></p-confirmDialog>
