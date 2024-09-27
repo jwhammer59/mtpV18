@@ -54,7 +54,7 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'member-id',
+    path: 'member-ids',
     loadComponent: () =>
       import('./components/memberId/member-id.component').then(
         (m) => m.MemberIdComponent
@@ -75,14 +75,6 @@ export const routes: Routes = [
       import(
         './components/memberId/edit-member-id/edit-member-id.component'
       ).then((m) => m.EditMemberIdComponent),
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'member-id-details/:id',
-    loadComponent: () =>
-      import(
-        './components/memberId/member-id-details/member-id-details.component'
-      ).then((m) => m.MemberIdDetailsComponent),
     canActivate: [AuthGuard],
   },
   {
@@ -115,14 +107,6 @@ export const routes: Routes = [
       import(
         './components/provider/edit-provider/edit-provider.component'
       ).then((m) => m.EditProviderComponent),
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'provider-details/:id',
-    loadComponent: () =>
-      import(
-        './components/provider/provider-details/provider-details.component'
-      ).then((m) => m.ProviderDetailsComponent),
     canActivate: [AuthGuard],
   },
 ];

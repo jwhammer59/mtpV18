@@ -1,1 +1,179 @@
-<p>ministry works!</p>
+<p-toast></p-toast>
+<app-header
+  [title]="headerTitle()"
+  [icon]="headerIcon()"
+  [buttonVisible]="headerBtnVisible()"
+  [logo]="headerLogo()"
+></app-header>
+<app-body>
+  <app-card>
+    <p-toolbar styleClass="mb-4 gap-2">
+      <ng-template pTemplate="left">
+        <i class="pi pi-heart mr-2" style="font-size: 1.5rem"></i>
+        <h3>Manage Ministries</h3>
+      </ng-template>
+      <ng-template pTemplate="right">
+        <p-button
+          [text]="true"
+          severity="success"
+          label="Add New Ministry"
+          icon="pi pi-plus"
+          styleClass="mr-2"
+          (click)="openNewMinistry()"
+        ></p-button>
+      </ng-template>
+    </p-toolbar>
+    @if(ministries$ | async; as ministries) {
+    <p-table
+      [value]="ministries"
+      [rows]="5"
+      [paginator]="true"
+      [globalFilterFields]="['ministryName', 'ministryHead']"
+      [rowHover]="true"
+      dataKey="id"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [showCurrentPageReport]="true"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="ministryName">
+            <div class="flex justify-content-center">
+              Ministry Name <p-sortIcon field="ministryName"></p-sortIcon>
+            </div>
+          </th>
+          <th pSortableColumn="ministryHead">
+            <div class="flex justify-content-center">
+              Ministry Head <p-sortIcon field="ministryHead"></p-sortIcon>
+            </div>
+          </th>
+          <th>
+            <div class="flex justify-content-center">Actions</div>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-ministry>
+        <tr>
+          <td>
+            <div class="flex justify-content-center">
+              {{ ministry.ministryName }}
+            </div>
+          </td>
+          <td>
+            <div class="flex justify-content-center">
+              <span class="p-buttonset">
+                <p-button
+                  [text]="true"
+                  severity="help"
+                  icon="pi pi-pencil"
+                  label="Edit"
+                  pTooltip="Edit"
+                  tooltipPosition="bottom"
+                  (click)="editMinistry(ministry)"
+                ></p-button>
+                <p-button
+                  [text]="true"
+                  severity="danger"
+                  icon="pi pi-trash"
+                  label="Delete"
+                  pTooltip="Delete"
+                  tooltipPosition="bottom"
+                  (click)="deleteMinistry(ministry.id!)"
+                ></p-button>
+              </span>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="summary">
+        <div class="flex align-items-center justify-content-between">
+          In total there are
+          {{ ministries ? ministries.length : 0 }} ministries.
+        </div>
+      </ng-template>
+    </p-table>
+    }
+    <p-dialog
+      styleClass="p-fluid"
+      header="Add/Edit Ministries"
+      [(visible)]="ministryDialog"
+      [style]="{ width: '850px' }"
+      [modal]="true"
+      (onHide)="resetForm()"
+    >
+      <ng-template pTemplate="content">
+        <form
+          #addMinistryForm="ngForm"
+          (ngSubmit)="onSubmit(addMinistryForm.value, id!)"
+          novalidate
+        >
+          <div class="formgrid grid">
+            <div class="field col-12">
+              <label for="ministryName">Ministry Name</label>
+              <input
+                type="text"
+                pInputText
+                id="ministryName"
+                name="ministryName"
+                [(ngModel)]="ministry.ministryName"
+                required
+                autofocus
+              />
+              @if(submitted() && !ministry.ministryName) {
+              <small class="p-error">Ministry name is required.</small>
+              }
+            </div>
+            <div class="field col-12">
+              @if(onlyMinistryHeads$ | async; as ministryHeads) {
+
+              <label for="ministryHead">Ministry Head</label>
+              <p-dropdown
+                [options]="ministryHeads"
+                name="ministryHead"
+                id="ministryHead"
+                [(ngModel)]="ministry.ministryHead"
+                placeholder="Select ministry head"
+              ></p-dropdown>
+              } @if(submitted() && !ministry.ministryHead) {
+              <small class="p-error">Ministry head is required.</small>
+              }
+            </div>
+          </div>
+
+          <div class="flex justify-content-around">
+            <div>
+              <p-button
+                [text]="true"
+                severity="success"
+                type="submit"
+                value="Submit"
+                label="Save"
+                icon="pi pi-save"
+                styleClass="mt-3"
+              ></p-button>
+            </div>
+            <div>
+              <p-button
+                [text]="true"
+                severity="help"
+                label="Cancel"
+                icon="pi pi-times"
+                styleClass="mt-3"
+                (click)="hideDialog()"
+              ></p-button>
+            </div>
+          </div>
+        </form>
+      </ng-template>
+    </p-dialog>
+  </app-card>
+</app-body>
+
+<!-- Begin Confirmation Dialog -->
+<p-confirmDialog
+  [style]="{ width: '50vw' }"
+  [baseZIndex]="10000"
+  rejectButtonStyleClass="p-button-text"
+  acceptButtonStyleClass="p-button-text p-button-danger"
+  defaultFocus="reject"
+></p-confirmDialog>
+<!-- End Confirmation Dialog -->

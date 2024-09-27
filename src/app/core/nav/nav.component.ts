@@ -72,7 +72,7 @@ export class NavComponent implements OnDestroy {
             {
               label: 'Member ID',
               icon: 'pi pi-fw pi-id-card',
-              routerLink: ['member-id'],
+              routerLink: ['member-ids'],
             },
             {
               label: 'Add Member ID',

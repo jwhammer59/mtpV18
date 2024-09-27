@@ -1,1 +1,199 @@
-<p>add-member-id works!</p>
+<p-toast key="error"></p-toast>
+<p-toast key="success" (onClose)="goToMemberIds()"></p-toast>
+<app-header
+  [title]="headerTitle()"
+  [icon]="headerIcon()"
+  [logo]="headerLogo()"
+></app-header>
+<app-body>
+  <app-card [header]="cardHeader()">
+    <form [formGroup]="addMemberIdForm" (ngSubmit)="onSubmit(addMemberIdForm)">
+      <div class="flex justify-content-center">
+        <p-card [style]="{ width: '60vw' }">
+          <ng-template pTemplate="content">
+            <div class="grid p-fluid">
+              <!-- Member ID & Full Name -->
+              <div class="field col-12 lg:col-6">
+                <label for="memberIdName">ID</label>
+                <input
+                  pInputText
+                  type="text"
+                  id="memberIdName"
+                  name="memberIdName"
+                  formControlName="memberIdName"
+                  placeholder="Enter Member ID"
+                  class="focus:border-primary w-full ng-invalid ng-touched"
+                />
+                @if((f['memberIdName'].invalid && f['memberIdName'].dirty) ||
+                (addMemberIdForm.invalid && this.submitted() &&
+                f['memberIdName'].invalid)) {
+                <small id="memberIdName-help" class="p-error">{{
+                  getMemberIdNameMessage()
+                }}</small>
+                }
+              </div>
+              <div class="field col-12 lg:col-6">
+                <label for="memberIdFullName">Full Name</label>
+                <input
+                  pInputText
+                  type="text"
+                  id="memberIdFullName"
+                  name="memberIdFullName"
+                  formControlName="memberIdFullName"
+                  placeholder="Enter Member ID Full Name"
+                  class="focus:border-primary w-full ng-invalid ng-touched"
+                />
+                @if((f['memberIdFullName'].invalid &&
+                f['memberIdFullName'].dirty) || (addMemberIdForm.invalid &&
+                this.submitted() && f['memberIdFullName'].invalid)) {
+                <small id="memberIdFullName-help" class="p-error">{{
+                  getMemberIdFullNameMessage()
+                }}</small>
+                }
+              </div>
+              <!-- Member Phone & Email -->
+              <div class="field col-12 lg:col-6">
+                <label for="memberIdPhone">Phone</label>
+                <p-inputMask
+                  styleClass="focus:border-primary w-full ng-invalid ng-touched"
+                  mask="(999) 999-9999"
+                  id="memberIdPhone"
+                  name="memberIdPhone"
+                  formControlName="memberIdPhone"
+                  placeholder="(999) 999-9999"
+                ></p-inputMask>
+                @if((f['memberIdPhone'].invalid && f['memberIdPhone'].dirty) ||
+                (addMemberIdForm.invalid && this.submitted() &&
+                f['memberIdPhone'].invalid)) {
+                <small id="memberIdPhone-help" class="p-error"
+                  >Phone number is required</small
+                >
+                }
+              </div>
+              <div class="field col-12 lg:col-6">
+                <label for="memberIdEmail">Email</label>
+                <input
+                  id="memberIdEmail"
+                  pInputText
+                  type="email"
+                  formControlName="memberIdEmail"
+                  class="focus:border-primary w-full ng-invalid ng-touched"
+                  placeholder="Enter Member ID Email"
+                />
+                @if((f['memberIdEmail'].invalid && f['memberIdEmail'].dirty) ||
+                (addMemberIdForm.invalid && this.submitted() &&
+                f['memberIdEmail'].invalid)) {
+                <small id="memberIdEmail-help" class="p-error"
+                  >Email is required</small
+                >
+                }
+              </div>
+              <!-- Member Address 1 & 2 -->
+              <div class="field col-12 lg:col-6">
+                <label for="memberIdAdd1">Address 1</label>
+                <input
+                  id="memberIdAdd1"
+                  pInputText
+                  type="text"
+                  formControlName="memberIdAdd1"
+                  class="focus:border-primary w-full ng-invalid ng-touched"
+                  placeholder="Enter Member ID Address"
+                />
+                @if((f['memberIdAdd1'].invalid && f['memberIdAdd1'].dirty) ||
+                (addMemberIdForm.invalid && this.submitted() &&
+                f['memberIdAdd1'].invalid)) {
+                <small id="memberIdAdd1-help" class="p-error"
+                  >Member ID address required</small
+                >
+                }
+              </div>
+              <div class="field col-12 lg:col-6">
+                <label for="memberIdAdd2">Address 2</label>
+                <input
+                  id="memberIdAdd2"
+                  pInputText
+                  type="text"
+                  formControlName="memberIdAdd2"
+                  class="focus:border-primary w-full"
+                />
+              </div>
+              <!-- Member City, State & Zipcode -->
+              <div class="field col-12 lg:col-4">
+                <label for="memberIdCity">City</label>
+                <input
+                  id="memberIdCity"
+                  pInputText
+                  type="text"
+                  formControlName="memberIdCity"
+                  class="focus:border-primary w-full ng-invalid ng-touched"
+                  placeholder="Enter a provider city"
+                />
+                @if((f['memberIdCity'].invalid && f['memberIdCity'].dirty) ||
+                (addMemberIdForm.invalid && this.submitted() &&
+                f['memberIdCity'].invalid)) {
+                <small id="memberIdCity-help" class="p-error"
+                  >Member ID city required.</small
+                >
+                }
+              </div>
+              <div class="field col-12 lg:col-4">
+                <label for="memberIdState">State</label>
+                <p-dropdown
+                  [options]="states"
+                  name="memberIdState"
+                  id="memberIdState"
+                  formControlName="memberIdState"
+                  placeholder="Select provider state"
+                ></p-dropdown>
+                @if((f['memberIdState'].invalid && f['memberIdState'].dirty) ||
+                (addMemberIdForm.invalid && this.submitted() &&
+                f['memberIdState'].invalid)) {
+                <small id="memberIdState-help" class="p-error"
+                  >Member ID state is required</small
+                >
+                }
+              </div>
+              <div class="field col-12 lg:col-4">
+                <label for="memberIdZip">Zipcode</label>
+                <p-inputMask
+                  styleClass="focus:border-primary w-full ng-invalid ng-touched"
+                  mask="99999?-9999"
+                  id="memberIdZip"
+                  name="memberIdZip"
+                  formControlName="memberIdZip"
+                  placeholder="99999"
+                ></p-inputMask>
+                @if((f['memberIdZip'].invalid && f['memberIdZip'].dirty) ||
+                (addMemberIdForm.invalid && this.submitted() &&
+                f['memberIdZip'].invalid)) {
+                <small id="memberIdZip-help" class="p-error"
+                  >Zipcode is required</small
+                >
+                }
+              </div>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="footer">
+            <div class="flex justify-content-end">
+              <p-button
+                label="Save"
+                icon="pi pi-fw pi-save"
+                type="submit"
+                severity="success"
+                [text]="true"
+              ></p-button>
+              <p-button
+                label="Cancel"
+                icon="pi pi-fw pi-times"
+                type="button"
+                severity="warning"
+                [text]="true"
+                (onClick)="onCancelAddMemberId()"
+              ></p-button>
+            </div>
+          </ng-template>
+        </p-card>
+      </div>
+    </form>
+  </app-card>
+</app-body>
