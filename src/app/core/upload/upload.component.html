@@ -1,0 +1,30 @@
+<p-toast></p-toast>
+<div class="flex justify-content-center">
+  <div class="flex flex-column">
+    <div class="field">
+      <label for="image">Dwelling Image</label>
+      <div id="image">
+        <input id="image" type="file" (change)="selectFile($event)" />
+      </div>
+    </div>
+
+    <div class="flex justify-content-center my-2">
+      <p-button
+        type="button"
+        [text]="true"
+        severity="help"
+        label="Upload"
+        icon="pi pi-upload"
+        [disabled]="isDuplicateFileName"
+        (onClick)="upload()"
+      ></p-button>
+    </div>
+
+    <div class="flex flex-column mt-2">
+      <div>
+        <span>Upload Status</span>
+      </div>
+      <p-progressBar styleClass="mt-2" [value]="progress"></p-progressBar>
+    </div>
+  </div>
+</div>

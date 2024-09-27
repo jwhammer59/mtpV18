@@ -15,7 +15,7 @@ export interface Member {
   avatarImgName?: string;
   avatarDownloadUrl?: string;
   ministries: Ministry[];
-  familyID: string;
+  memberID: string;
   physician: string;
   dentist: string;
   hospital: string;
